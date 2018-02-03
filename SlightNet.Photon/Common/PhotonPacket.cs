@@ -22,6 +22,10 @@ namespace SlightNet.Photon.Common
             }
         }
 
+        public PhotonPacket(byte[] buffer) : base(buffer)
+        {
+        }
+
         protected void SerializeBigEndianInt32(int value)
         {
             var offs = 0;

@@ -12,6 +12,10 @@ namespace SlightNet.Photon.Server
                 Write((long)0); // Server and Client TickCount Placeholder
         }
 
+        public PhotonServerPacket(byte[] buffer) : base(buffer)
+        {
+        }
+
         protected override byte[] BuildBuffer()
         {
             var oldPos = Position;

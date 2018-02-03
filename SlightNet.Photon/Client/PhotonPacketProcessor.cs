@@ -1,12 +1,12 @@
 ﻿using Ether.Network.Photon.Common.Protocol;
 using SlightNet.Common.Interface;
-using SlightNet.Photon.Client;
+using SlightNet.Photon.Server;
 
-namespace SlightNet.Photon.Server
+namespace SlightNet.Photon.Client
 {
     public sealed class PhotonPacketProcessor : IPacketProcessor
     {
-        public int HeaderSize => 5;
+        public int HeaderSize => 9;
 
         public bool SplitPacket => false;
 
@@ -23,7 +23,7 @@ namespace SlightNet.Photon.Server
 
         public IPacketStream ProcessPacket(byte[] packet)
         {
-            return new PhotonClientPacket(packet);
+            return new PhotonServerPacket(packet);
         }
     }
 }
