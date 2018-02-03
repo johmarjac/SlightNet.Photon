@@ -8,11 +8,10 @@ namespace SlightNet.Photon.Common
     {
         protected PhotonPacket(bool isPingPacket = false, byte channelId = 0, byte reliable = 1)
         {
-            IsPingPacket = isPingPacket;
             ChannelId = channelId;
             Reliable = reliable;
 
-            Write(IsPingPacket ? (byte)0xF0 : (byte)0xFB); // Ping Packet == 0xF0 else 0xFB
+            Write(isPingPacket ? (byte)0xF0 : (byte)0xFB); // Ping Packet == 0xF0 else 0xFB
             if(!IsPingPacket)
             {
                 Write(0); // Length Placeholder
@@ -22,7 +21,7 @@ namespace SlightNet.Photon.Common
             }
         }
 
-        public PhotonPacket(byte[] buffer) : base(buffer)
+        protected PhotonPacket(byte[] buffer) : base(buffer)
         {
         }
 
@@ -37,7 +36,13 @@ namespace SlightNet.Photon.Common
         protected abstract byte[] BuildBuffer();
 
         public override byte[] Buffer => BuildBuffer();
-        protected bool IsPingPacket { get; }
+        protected bool IsPingPacket
+        {
+            get
+            {
+                return Size >= 1 && ToArray()[0] == 240;
+            }
+        }
         protected byte ChannelId { get; }
         protected byte Reliable { get; }
 

@@ -23,7 +23,7 @@ namespace SlightNet.Photon.Client
 
         public IPacketStream ProcessPacket(byte[] packet)
         {
-            return new PhotonServerPacket(packet);
+            return new PhotonServerPacket(packet); ;
         }
     }
 }
